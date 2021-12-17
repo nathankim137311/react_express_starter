@@ -1,0 +1,21 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px;
+    margin: 0px;
+    border: 1px red solid;
+    color: white;
+}
+
+nav h3 {
+    margin-left: 5em;
+}
+
+.nav-links {
+    width: 40%;
+    display: flex;
+    justify-content: space-evenly;
+    list-style: none;
+    padding: 0;
+}

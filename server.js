@@ -1,16 +1,38 @@
+const puppeteer = require('puppeteer');
 const express = require('express');
 const cors = require('cors');
 
 const app = express();
 
-app.get('/api/customers', cors(), (req, res) => {
-  const customers = [
-    {id: 1, firstName: 'John', lastName: 'Doe'},
-    {id: 2, firstName: 'Brad', lastName: 'Traversy'},
-    {id: 3, firstName: 'Mary', lastName: 'Swanson'},
-  ];
+app.get('/api/oney', cors(), async (req, res) => {
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage(); 
+  await page.goto('https://sharkrobot.com/collections/oney');
 
-  res.json(customers);
+  const products = await page.evaluate(() => {
+    // let ul = document.querySelectorAll('.block-grid .product-title');
+    let ul = document.querySelectorAll('.block-grid li'); 
+
+    let products = [];
+    ul.forEach(element => {
+
+      const product = {
+        title: element.querySelector('.product-title').textContent,
+        imgSrc: element.querySelector('.thumb img').src,
+        price: element.querySelector('.money').textContent, 
+      };
+
+      if (product != null) {
+        products.push(product);
+      }
+    });
+
+    return products
+  });
+
+  console.log(products);
+  res.json(products);
+  browser.close();
 });
 
 const port = 5000;

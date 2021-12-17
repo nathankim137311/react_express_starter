@@ -1,20 +1,21 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Customers from './components/customers';
+import React from 'react';
+import Nav from './components/nav/Nav';
+import Products from './components/products/Products';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">React Express Starter</h1>
-        </header>
-        <Customers />
-      </div>
-    );
-  }
+function App() {
+  return (
+    <div>
+      {/* <Nav /> */}
+      <Products />
+    </div>
+    // <Router>
+    // <Nav />
+    // <Routes>
+    //   <Route path='/products' element={<Products />} />
+    // </Routes>
+    // </Router>
+  );
 }
 
 export default App;
