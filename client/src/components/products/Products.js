@@ -4,6 +4,7 @@ import uniqid from 'uniqid';
 
 function Products() {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
       fetchData(); 
@@ -13,6 +14,8 @@ function Products() {
       let data = await fetch('/api/oney'); 
       data = await data.json();
       setProducts(data);
+      setLoading(true);
+
       console.log(data);
   }
 
@@ -29,21 +32,29 @@ function Products() {
   }
 
 return (
-  <div>
-      <h2>Products</h2>
-      <ul className='products-container'>
-          {products.map(product => {
-              return (
-                <li key={uniqid()}>
-                    <div style={stylingObject.card} className='product'>
-                        <img style={stylingObject.img} src={product.imgSrc} alt={product.title} />
-                        <span className='product-title'>{product.title}</span>
-                    </div>
-                </li>
-              );
-          })}
-      </ul>
-  </div>
+  <React.Fragment>
+    {!loading ? (
+      <h1>Fuck You</h1>
+    ) : (
+      <React.Fragment>
+        <h2>Products</h2>
+        <ul className='products-container'>
+            {products.map(product => {
+                return (
+                  <li key={uniqid()}>
+                      <div style={stylingObject.card} className='product'>
+                          <img style={stylingObject.img} src={product.imgSrc} alt={product.title} />
+                          <span className='product-title'>{product.title}</span>
+                          <span className='product-price'>From {product.price}</span>
+                          <span>{product.poop}</span>
+                      </div>
+                  </li>
+                );
+            })}
+        </ul>
+      </React.Fragment>
+    )}
+  </React.Fragment>
 );
 }
 

@@ -14,8 +14,8 @@ function Nav() {
             <Link style={navStyle} to='/'>
                 <li>Home</li>
             </Link>
-            <Link style={navStyle} to='/api/oney'>
-                <li>Products</li>
+            <Link style={navStyle} to='/creators'>
+                <li>Creators</li>
             </Link>
         </ul>
     </nav>

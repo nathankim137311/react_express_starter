@@ -31,9 +31,10 @@ li {
   background-color: white;
 }
 
-.product-title {
-  position: absolute;
+.product span {
+  text-align: center;
+}
+
+.product span:first-child {
   margin: 10px;
-  bottom: 10px;
-  border-radius: 3px;
 }
