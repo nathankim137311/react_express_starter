@@ -1,0 +1,17 @@
+// User should be able to input something in the search bar and the page should
+return a rendered list of youtubers that match the name. And the list should include
+relevant details like number of subscribers, view count, and when the channel was 
+started. 
+
+the site should check if the youtuber has any merchandise. if they do return the 
+youtuber. 
+
+// check price functionality
+the site should have a check price feature that allows users to add the youtuber
+merch to a list which checks the price in a given time interval eg. every ten mins.
+
+the user should be able to set the price so when the price dips below that number
+the site will send an email to them notifying them that their item is below a 
+certain price.
+
+if the merch goes below a certain price then notify the user 

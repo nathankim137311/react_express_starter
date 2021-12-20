@@ -17,6 +17,9 @@ function Nav() {
             <Link style={navStyle} to='/creators'>
                 <li>Creators</li>
             </Link>
+            <Link style={navStyle} to='/contact'>
+                <li>Contact</li>
+            </Link>
         </ul>
     </nav>
   );

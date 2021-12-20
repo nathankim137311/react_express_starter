@@ -4,7 +4,7 @@ const cors = require('cors');
 
 const app = express();
 
-app.get('/api/oney', cors(), async (req, res) => {
+app.get('/creators/products/OneyPlays', cors(), async (req, res) => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage(); 
   await page.goto('https://sharkrobot.com/collections/oney');
@@ -16,7 +16,7 @@ app.get('/api/oney', cors(), async (req, res) => {
     ul.forEach(element => {
 
       const product = {
-        title: element.querySelector('.product-title').textContent,
+        title: element.querySelector('.product-title').textContent.replace(/\$\d+\.\d+ USD/, ''),
         imgSrc: element.querySelector('.thumb img').src,
         price: element.querySelector('.money').textContent, 
       };
@@ -25,6 +25,37 @@ app.get('/api/oney', cors(), async (req, res) => {
         products.push(product);
       }
     });
+
+    return products
+  });
+
+  console.log(products);
+  res.json(products);
+  browser.close();
+});
+
+app.get('/creators/products/TigerBelly', cors(), async (req, res) => {
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage(); 
+  await page.goto('https://tigerbelly.myshopify.com/collections/all');
+
+  const products = await page.evaluate(() => {
+    products = element.querySelector('.grid__image img').src; 
+    // let ul = document.querySelectorAll('.grid-uniform.product-grid div'); 
+
+    // let products = [];
+    // ul.forEach(element => {
+
+    //   const product = {
+    //     title: element.querySelector('.product-grid-title').textContent,
+    //     imgSrc: element.querySelector('.grid__image img').src,
+    //     price: element.querySelector('.price').textContent, 
+    //   };
+
+    //   if (product != null) {
+    //     products.push(product);
+    //   }
+    // });
 
     return products
   });

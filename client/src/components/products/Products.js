@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './products.css';
 import uniqid from 'uniqid';
 
-function Products() {
+function Products({ creator }) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -11,7 +11,7 @@ function Products() {
   }, []);
 
   const fetchData = async () => {
-      let data = await fetch('/api/oney'); 
+      let data = await fetch(`/creators/products/${creator}`); 
       data = await data.json();
       setProducts(data);
       setLoading(true);
@@ -34,7 +34,7 @@ function Products() {
 return (
   <React.Fragment>
     {!loading ? (
-      <h1>Fuck You</h1>
+      <h1 className='loading-txt'>LOADING</h1>
     ) : (
       <React.Fragment>
         <h2>Products</h2>
@@ -46,7 +46,6 @@ return (
                           <img style={stylingObject.img} src={product.imgSrc} alt={product.title} />
                           <span className='product-title'>{product.title}</span>
                           <span className='product-price'>From {product.price}</span>
-                          <span>{product.poop}</span>
                       </div>
                   </li>
                 );
