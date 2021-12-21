@@ -16,7 +16,8 @@ h2 {
   grid-template-columns: repeat(4, auto);
   gap: 2em; 
   list-style: none;
-  padding: 0;
+  padding-left: 0px;
+  padding-bottom: 100px;
   margin: auto;
 }
 
@@ -32,16 +33,31 @@ li {
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   padding-block: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   background-color: white;
 }
 
-.product span {
-  text-align: center;
+.product:hover {
+  cursor: pointer;
 }
 
-.product span:first-child {
-  margin: 10px;
+.product img {
+  position: absolute;
+  top: 1.25em;
+}
+
+.product-title {
+  position: absolute;
+  bottom: 2.25em;
+  text-align: center;
+  color: black;
+}
+
+.product-price {
+  position: absolute;
+  bottom: 1em;
+  color: #ff533d;
 }

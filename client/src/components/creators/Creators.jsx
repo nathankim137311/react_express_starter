@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { config } from '../../../config';
+
+const token = config.MY_API_KEY; 
 
 function Creators() {
     const [creators, setCreators] = useState([
@@ -33,18 +36,6 @@ function Creators() {
         }, 
     ]);
 
-    // do not push this file with sensitive information 
-    // const youtubeKey = 'AIzaSyDlVO0_QYZOBmqxWPpuMQJe91OCtL38K00';
-    // const youtubeUser = 'UCO1ITICo8MLHGAXR1uzFwjA'; // channel id
-
-    // const youtubeData = async (creator) => {
-    //     let data = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=${creator}&key=${youtubeKey}`);
-    //     data = await data.json(); 
-    //     console.log(data);
-
-    //     setSubCount(data["items"][0].statistics.subscriberCount);
-    // }
-
     return (
         <React.Fragment>
             <h1>Creators List</h1>
@@ -52,7 +43,7 @@ function Creators() {
                 {creators.map(creator => {
                     return (
                         <h1 key={creator.channelId}>
-                            <Link to={`/creators/products/${creator.channelName}`}>{creator.channelName}</Link>
+                            <Link to={`/creators/${creator.channelName}/products`}>{creator.channelName}</Link>
                         </h1>
                     );
                 })}
