@@ -3,8 +3,10 @@ import './products.css';
 import Card from './Card';
 import uniqid from 'uniqid';
 
-function Products({ creator }) {
+function Products() {
   const [products, setProducts] = useState([]);
+  const [product, setProduct] = useState(null);
+
   const [loading, setLoading] = useState(false);
   const [showCard, setShowCard] = useState(false);
 
@@ -16,9 +18,9 @@ function Products({ creator }) {
       }
 
       async function fetchData() {
-          let data = await fetch(`/creators/${creator}/products`); 
+          let data = await fetch(`/shop/products`); 
           data = await data.json();
-          data.map(product => ({ ...product, id: uniqid() }));
+          data = data.map(product => ({ ...product, id: uniqid() }));
     
           if (isMounted) {
             setProducts(data);
@@ -29,19 +31,6 @@ function Products({ creator }) {
       }
 
   }, []);
-
-  // const fetchData = async () => {
-  //     let data = await fetch(`/creators/${creator}/products`); 
-  //     data = await data.json();
-  //     data.map(product => ({ ...product, id: uniqid() }));
-
-  //     if (isMounted) {
-  //       setProducts(data);
-  //       setLoading(true);
-  //     }
-
-  //     console.log(data);
-  // }
 
   const stylingObject = {
       img: {
@@ -55,8 +44,12 @@ function Products({ creator }) {
       }
   }
 
-  const handleClick = () => {
+  const showCardById = (e) => {
       setShowCard(true);
+      const productId = e.target.id; 
+      const item = products.find(product => product.id === productId);
+      setProduct(item);
+      console.log(product);
   }
 
 return (
@@ -66,19 +59,19 @@ return (
     ) : (
       <React.Fragment>
         <h2>Products</h2>
-        {showCard ? <Card /> : null}
+        {showCard ? <Card setShowCard={setShowCard} product={product} /> : null}
         <ul className='products-container'>
             {products.map(product => {
                 return (
                   <li key={uniqid()}>
                       <div
+                      id={product.id}
                       style={stylingObject.card} 
                       className='product'
-                      onClick={handleClick}>
+                      onClick={showCardById}>
                           <img style={stylingObject.img} src={product.imgSrc} alt={product.title} />
                           <span className='product-title'>{product.title}</span>
                           <span className='product-price'>From {product.price}</span>
-                          <span>{product.id}</span>
                       </div>
                   </li>
                 );
