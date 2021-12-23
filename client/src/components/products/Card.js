@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { CartContext } from '../../CartContext';
 import './card.css'; 
 
 function Card({ setShowCard, product }) {
     const [count, setCount] = useState(1);
-    const [cart, setCart] = useState([]);
+    const [cart, setCart] = useContext(CartContext);
+    // const [cart, setCart] = useState([]);
 
     const incrementCount = () => setCount(count + 1);
     let decrementCount = () => setCount(count - 1);
@@ -17,7 +19,8 @@ function Card({ setShowCard, product }) {
             ...product,
             quantity: count,
         }
-        setCart(prevCart => [...prevCart, item]);
+        setCart(prevCart => [...prevCart, item]);           
+
         console.log(cart);
     }
 

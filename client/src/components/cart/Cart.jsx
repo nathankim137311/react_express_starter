@@ -5,14 +5,7 @@ function Cart() {
     const cart = useContext(CartContext); 
     return (
         <React.Fragment>
-            <h1>Shopping Cart</h1>
-            <ul>
-                {cart.map(product => {
-                    return (
-                    <li>{product.id}</li>
-                    )
-                })}
-            </ul>
+            <h1>{cart.title}</h1>
         </React.Fragment>
     )
 }

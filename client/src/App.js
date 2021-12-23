@@ -7,22 +7,24 @@ import Contact from './components/contact/Contact';
 import Cart from './components/cart/Cart';
 import Footer from './components/footer/Footer';
 
-import { CartContext } from './CartContext';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { CartProvider } from './CartContext';
 
 function App() {
   return (
     <Router>
-    <Nav />
-    <Routes>
-      <Route path='/' element={<Home />} />
-      <Route path='/contact' element={<Contact />} />
-      <CartContext.Provider />
-        <Route path='/shop/products' element={<Products />} />   
-        <Route path='/cart' element={<Cart />} />
-      <CartContext.Provider />
-    </Routes>
-    <Footer />
+      <Nav />
+      <CartProvider>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/contact' element={<Contact />} />
+        <Route path='/shop/products' 
+        element={<Products />} />   
+        <Route path='/cart' 
+        element={<Cart />} />
+      </Routes>
+      </CartProvider>
+      <Footer />
     </Router>
   );
 }
